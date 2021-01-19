@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add Product</h2>
+<mat-divider></mat-divider>
+<br>
+<mat-dialog-content align="center">
+  <form #addProductForm="ngForm">
+
+    <mat-form-field [appearance]="!(data.action == 'update')?'outline':''" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required name="name" [(ngModel)]="product.name" [readonly]="data.action=='update'">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Quantity</mat-label>
+      <input matInput required name="quantity" type="number" [(ngModel)]="product.quantity">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Price</mat-label>
+      <input matInput required name="price" type="number" step="0.01" [(ngModel)]="product.price">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button *ngIf="data.action == 'add'" mat-raised-button [disabled]="!addProductForm.form.valid" (click)="addProduct()">Add</button>
+  <button *ngIf="data.action == 'update'" mat-raised-button [disabled]="!addProductForm.form.valid" (click)="updateProduct()">Update</button>
+  
+  <!-- <button mat-raised-button [mat-dialog-close]="true" >{{data.confirmTitle}}</button> -->
+  <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>

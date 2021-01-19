@@ -1,0 +1,26 @@
+<button (click)="add()">Add</button>
+<form id="form1" [formGroup]="invoiceItemsForm">
+  <div formArrayName="invoiceItems">
+    <div *ngFor="let invoiceItem of invoiceItems.controls; let i=index">
+      <div [formGroupName]="i">
+
+          <!-- <mat-label>Select a Product</mat-label>
+          <mat-select formControlName="fund">
+            <mat-option >Selecte a Product</mat-option>
+            <mat-option value="Togo">SeaBridge TFX</mat-option>
+            <mat-option value="Guinea-Bissau">Buyer</mat-option>
+            <mat-option value="Laos">Seller</mat-option>
+            <mat-option value="Andorra">Funder</mat-option>
+   -->
+            <!-- <mat-option *ngFor="let product of products" [value]="product.id">{{product.name}}</mat-option> -->
+          <!-- </mat-select> -->
+        <!-- <select name="country" formControlName="fund">
+          <option value="Togo">SeaBridge TFX</option>
+          <option value="Guinea-Bissau">Buyer</option>
+          <option value="Laos">Seller</option>
+          <option value="Andorra">Funder</option>
+        </select> -->
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-divider></mat-divider>
+<br>
+<mat-dialog-content align="center">
+  <h3>{{data.message}}</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button style="background-color:#27b327" [mat-dialog-close]="true" >{{data.confirmationTitle}}</button>
+  <button mat-raised-button [mat-dialog-close]="false">{{data.cancelTitle || "Cancel"}}</button>
+</mat-dialog-actions>

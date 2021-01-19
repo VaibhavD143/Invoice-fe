@@ -1,0 +1,134 @@
+<br>
+<mat-card class="card">
+  <mat-card-content>
+    <div align="right">
+      <button mat-raised-button color="primary" (click)="confirmGenerateInvoice(customerForm)">Generate Invoice</button>
+    </div>
+    <br>
+    <div>
+      <h1>Customer Deatials</h1>
+      <form #customerForm="ngForm">
+        <table width="100%">
+          <tr>
+            <td>
+              <mat-form-field appearance="outline" class="full-width-margin">    
+                <mat-label>Name</mat-label>
+                <input matInput required name="name" [(ngModel)]="customer.name">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contact No.</mat-label>
+                <input matInput required name="contactNumber" [(ngModel)]="customer.contactNumber">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field appearance="outline" class="full-width-margin">
+                <mat-label>Choose a date</mat-label>
+                <input required matInput name="date" [matDatepicker]="picker" [(ngModel)]="date" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <!-- <mat-form-field appearance="outline" class="full-width-margin">    
+                <mat-label>Date</mat-label>
+                <input matInput required name="name" [(ngModel)]="date">
+              </mat-form-field> -->
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div >
+      <table mat-table [dataSource]="dataSource" class="full-width white-header mat-elevation-z8">
+        
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>No</th>
+          <td mat-cell *matCellDef="let item;let i=index">{{i+1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell  *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let item">{{item.product.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell  *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let item">{{item.product.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell  *matHeaderCellDef>Quantity</th>
+          <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell  *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let item">{{item.product.price}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell  *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let item">{{(item.product.price * item.quantity).toFixed(2) }}</td>
+        </ng-container>
+
+        <!-- for Updating price or quantity -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell  *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let item;let i=index">
+            <button mat-raised-button color="warn" (click)="deleteItem(i)">Del</button>
+          </td>
+        </ng-container>
+        
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <!-- <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let materialRequest" [attr.colspan]="columnsToDisplay.length" align="center">
+            <div class="lst-element-detail half-width" [@detailExpand]="materialRequest == expandedMaterialRequest ? 'expanded' : 'collapsed'" >
+              <table mat-table [dataSource]="materialRequest.itemMRMappings" class="full-width">
+                
+                <ng-container matColumnDef="item.name">
+                  <th mat-header-cell *matHeaderCellDef> ITEM </th>
+                  <td mat-cell *matCellDef="let lst"> {{lst.item.name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="item.uom.unit">
+                  <th mat-header-cell *matHeaderCellDef> UOM </th>
+                  <td mat-cell *matCellDef="let lst"> {{lst.item.uom.unit}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="make.value">
+                  <th mat-header-cell *matHeaderCellDef> MAKE </th>
+                  <td mat-cell *matCellDef="let lst"> {{lst.make.value}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="origin.value">
+                  <th mat-header-cell *matHeaderCellDef> ORIGIN </th>
+                  <td mat-cell *matCellDef="let lst"> {{lst.origin.value}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="itemTableColumns" class="header-bg-color"></tr>
+                <tr mat-row *matRowDef="let row; columns: itemTableColumns;let i=index"
+                  [class.row-bg-color]="(this.paginator.pageIndex == 0 ? i : i + this.paginator.pageIndex * this.paginator.pageSize)%2==0"></tr>
+              </table>
+            </div>
+          </td>
+        </ng-container>
+    -->
+        <tr mat-header-row class="header-bg-color" *matHeaderRowDef="columnsToDisplay;sticky:true"></tr>
+        <tr mat-row *matRowDef="let items; columns: columnsToDisplay;" 
+            ></tr>
+        <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" class="lst-detail-row"></tr> -->
+        
+      </table>
+      <br>
+      <button mat-raised-button color="primary" (click)="addItem()">Add Item</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>

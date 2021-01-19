@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span style="font-size: 40px;">Invoice Portal</span>
+    <span class="example-spacer"></span>
+    <span>
+      <img src="assets/logo.jpg" alt="Invoice Portal" height="40px">
+    </span>
+  </mat-toolbar-row>  
+</mat-toolbar>
+
+<!-- <div class="title">
+  <div class="left-title">
+    Invoice Portal
+  </div>
+  <div class="right-title">
+    <img src="assets/logo.jpg" alt="Invoice Portal" height="40px">
+  </div>
+</div> -->
+
+<div>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Generate Invoice">
+      <ng-template matTabContent>
+        <!-- <app-test></app-test> -->
+        <app-generate-invoice></app-generate-invoice>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Invoices">
+      <ng-template matTabContent>
+        <app-invoice-list></app-invoice-list>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Products">
+      <ng-template matTabContent>
+        <app-product-list></app-product-list>
+      </ng-template>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Add Product</h2>
+<mat-divider></mat-divider>
+<br>
+<mat-dialog-content align="center">
+  <form #addItemForm="ngForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Product</mat-label>
+      <mat-select required name="product" [(ngModel)]="item.product" (selectionChange)="productChanged()">
+        <mat-option>
+          <ngx-mat-select-search [(ngModel)]="searchCtrl" [placeholderLabel]="'Search...'"
+          [noEntriesFoundLabel]="'Not found'" name="search"></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let product of products | stringFilterByPipe:searchCtrl:'name'" [value]="product">
+          {{product.name}}
+        </mat-option>            
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="item.product">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Quantity</mat-label>
+        <input matInput required name="quantity" type="number" [min]="0" [max]="item.product.quantity" [(ngModel)]="item.quantity">
+      </mat-form-field>
+      
+      <div>
+        <h3>Amount</h3> <h2 style="font-weight: bold;">{{(item.product.price*item.quantity)|number:'1.2-2'}}</h2>
+      </div>
+    </div>
+  </form>
+  {{print(item)}}
+  <!-- {{item.product.}} -->
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <!-- <button  mat-raised-button [disabled]="!addItemForm.form.valid" (click)="addProduct()">Add</button> -->
+  
+  <button mat-raised-button [disabled]="!addItemForm.form.valid" [mat-dialog-close]="item" >Add Item</button>
+  <button mat-raised-button [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>
